@@ -13,6 +13,6 @@ if len(sys.argv) != 1:
 			value = float(curr['price_usd']) * float(config[curr['symbol']])
 			print("{0} {1}: {2:.2f} USD".format(config[curr['symbol']],curr['symbol'],value))
 			sum+=value
-		print("total balance = %.2f USD" % sum)
+		print("total balance = {0:.2f} USD".format(sum))
 else:
 	print("usage: python " + sys.argv[0] + " config.json")
