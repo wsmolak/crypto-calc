@@ -2,16 +2,17 @@ import urllib.request
 import json
 import sys
 
-
 if len(sys.argv) != 1:
 	config = json.load(open(sys.argv[1]))
-	with urllib.request.urlopen("https://api.coinmarketcap.com/v1/ticker/") as f:
+	#print(config.keys())
+	with urllib.request.urlopen("https://api.coinmarketcap.com/v1/ticker/?limit=0") as f:
 		json = json.loads(f.read())
 		currencies = filter(lambda x: x['symbol'] in config.keys(), json)
 		sum = 0
 		for curr in currencies:
-			print(config[curr['symbol']]+" "+curr['symbol']+": "+ str( float(curr['price_usd']) * float(config[curr['symbol']]) ) + " USD")
-			sum+=float(curr['price_usd']) * float(config[curr['symbol']])
-		print("total balance = "+ str(sum) + " USD")
+			value = float(curr['price_usd']) * float(config[curr['symbol']])
+			print("{0} {1}: {2:.2f} USD".format(config[curr['symbol']],curr['symbol'],value))
+			sum+=value
+		print("total balance = %.2f USD" % sum)
 else:
 	print("usage: python " + sys.argv[0] + " config.json")
