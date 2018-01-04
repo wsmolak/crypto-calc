@@ -10,12 +10,13 @@ if len(sys.argv) != 1:
     else:
         opener = urllib.request.FancyURLopener({})
     with opener.open("https://api.coinmarketcap.com/v1/ticker/?limit=0") as f:
-        json = json.loads(f.read())
+        res = f.read()
+        json = json.loads(res.decode())
         currencies = filter(lambda x: x['symbol'] in config.keys(), json)
         sum = 0
         for curr in currencies:
             value = float(curr['price_usd']) * float(config[curr['symbol']])
-            print("{0} {1}: {2:.2f} USD".format(config[curr['symbol']], curr['symbol'], value))
+            print("{0:6} {1:6}: {2:.2f} USD".format(config[curr['symbol']], curr['symbol'], value))
             sum += value
         print("total balance = {0:.2f} USD".format(sum))
 else:
