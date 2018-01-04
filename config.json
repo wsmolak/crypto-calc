@@ -4,5 +4,5 @@
 	"ETC":"10.99516377",
 	"NEO":"702.453685",
 	"ETH":"30.46538231",
-	"proxy":{"https": "http://w3p1.atos-infogerance.fr:8080"}
+	"proxy":"None"
 }
