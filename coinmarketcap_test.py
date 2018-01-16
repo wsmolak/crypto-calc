@@ -39,10 +39,9 @@ if len(sys.argv) != 1:
         output['rates'][curr['symbol']] = float(curr['price_usd'])
 
     output['sums'] = reduce(lambda x, y: x + y, output['balances'].values())
-    json_string = json.dumps(output)
 
     db_client = connect_to_mongo()
-    inserted = store_data(json_string, db_client)
+    inserted = store_data(output, db_client)
     if inserted is not None:
         print(inserted)
         sys.exit()
