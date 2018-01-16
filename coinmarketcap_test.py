@@ -41,7 +41,8 @@ if len(sys.argv) != 1:
     output['sums'] = reduce(lambda x, y: x + y, output['balances'].values())
     json_string = json.dumps(output)
 
-    inserted = store_data(json_string, connect_to_mongo())
+    db_client = connect_to_mongo()
+    inserted = store_data(json_string, db_client)
     if inserted is not None:
         print(inserted)
         sys.exit()
